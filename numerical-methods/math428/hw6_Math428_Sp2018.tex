@@ -1,0 +1,288 @@
+\documentclass [12pt]{article}
+\setlength{\topmargin}{-0.5cm} \setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm} \setlength{\textwidth}{6in}
+\setlength{\textheight}{9in}
+
+\usepackage{latexsym,fleqn,mathrsfs}
+\usepackage{graphicx}
+\usepackage{amsmath,amsthm,amsfonts,amscd}
+
+\begin{document}
+
+\def\e{\mathop{\rm e}\nolimits}
+\def\abs{\mathop{\rm abs}\nolimits}
+\def\sign{\mathop{\rm sign}\nolimits}
+\font\bb=msbm10 scaled \magstep1 % Blackboard bold for real numbers field
+                                 % and matrices
+\def\R{\hbox{\bb R}}
+
+\noindent
+\begin{center}
+{ \bf  {Math/Phys/Engr 428, Math 529/Phys 528 \\
+Numerical Methods - Spring 2018 }}\\[7pt]
+\underline{\bf Homework 6}\\
+
+%Assigned: Friday, January 20, 2012\\
+Due: {\bf Monday, April 30, 2018}
+
+\end{center}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item  {(\bf One-Step Methods).} \label{pr1}
+
+Find the solution of the equation $y'=2y$, $y(0)=1$ by
+
+\begin{enumerate}
+
+\item Euler method;
+
+\item Modified Euler (Runge-Kutta method of order $2$);
+
+\item Runge-Kutta method of order $4$. 
+
+\item Adam-Bashforth method of order $2$ (use exact solution to
+start the method).
+
+\end{enumerate}
+
+Use step size $h=0.1$, then repeat with $h=0.05$, $0.001$. In
+cases (a)--(c), perform the first 2 steps by hand (i.e. compute
+$y_1$ and $y_2$ by hand). Write a small program to find the
+solution at $x=1$. Find the exact solution, compute the error and
+${\rm error}/h^p$ for the various step sizes, where $p=1$, $2$ and
+$4$ in the respective cases. Put your results in a table and analyze them.
+
+\item \textbf{(Richardson Extrapolation Applied to Solving IVPs).} 
+ Perform one step of Richardson's extrapolation to get an improved solution
+at $x=1$ for the initial value problem in problem \ref{pr1}, using values obtained with $h=0.1$ and $h=0.05$ by the
+%Euler method.
+second order Runge-Kutta method (Improved Euler method). 
+Compare with exact solution.
+
+
+
+\item
+Solve $y'=2y$, $y(0)=1$ by the second order predictor-corrector method:
+
+\begin{enumerate}
+\item Predictor: $u_{n+1}^0= u_n+hf(u_n)$
+\item Corrector: $u_{n+1}^{k+1}=u_n+{{h}\over {2}}(f(u_n)+f(u_{n+1}^{k}))$
+
+\end{enumerate}
+
+Use $h=0.2$ and (a) one correction iteration per step (b) two
+correction iterations per step. Compute your solution at $x=1$.
+
+\item {(\bf Systems of Equations: See Section 7.8).}
+
+Consider the IVP for a nonlinear pendulum, $ y''(t) + \sin
+(y(t))  =0$, $y(0)=1$, $y'(0)=0 $. Convert the problem into a first
+order system and use 4th order Runge-Kutta with $h=0.5$ to solve
+for $y(1)$ and $y'(1)$.
+
+\newpage
+
+{(\bf Eigenvalues and Eigenvectors: see Sections 4.1, 4.2 and class notes)}
+
+\item 
+
+For matrix
+%
+\[
+%A=\pmatrix{4 & 2 & -2 & 2 \cr 1 & 3 & 1 & -1 \cr 0 & 0 & 2 & 0 \cr 1 & 1 & -3 & 5}
+A=\begin{pmatrix}
+ 1 & 4 & 5 \cr 4 & -3 & 0 \cr 5 & 0 & 7
+ \end{pmatrix}
+\]
+%
+
+\begin{enumerate}
+
+\item use the Power method with the initial vector $\frac{1}{\sqrt{3}}(1,1,1)^T$ and a convergence tolerance of $5\times 10^{-5}$ to estimate the dominant eigenvalue and its associated eigenvector. How many iterations are needed for convergence of eigenvector? Compare this with the number of iterations for convergence of the eigenvalue. Had convergence of the eigenvalue beed used for the stopping criterion, what would  the error have been for the eigenvector estimate?
+
+\item approximate the eigenvalue of the given matrix that is nearest to $q=1$ using the Inverse Power method.
+
+\item starting from the same initial vector, apply the Rayleigh Quotient Iteration method with the same stopping criterion. Which eigenvalue and eigenvector do you approximate? How many iterations would be needed compared with the previously used methods?
+
+\end{enumerate}
+
+
+%\item[] \textbf{Suggested/Additional problem for Phys 528 students: \\
+%Romberg Integration (see Section 6.7)} 
+
+%\begin{enumerate}
+%
+%\item Starting with only one subinterval, construct the four row  Romberg integration table for $\int_{3}^{3.5} \frac{x}{\sqrt{x^2-4}}dx$ (see problem \# 8, pg. 503).
+%
+%\item What is the error estimate for the final approximation? How does this compare with the actual error?
+%
+%\item How many subintervals would have been necessary to achieve the same accuracy using the composite trapezoid rule without extrapolation?
+%
+%\end{enumerate}
+%
+%\end{enumerate}
+%
+%\end{document}
+%\item  {(\bf One-Step Methods).}
+%
+%Find the solution of the equation $y'=2y$, $y(0)=1$ by
+%
+%\begin{enumerate}
+%
+%\item Euler method;
+%
+%\item Modified Euler (Runge-Kutta method of order $2$);
+%
+%\item Runge-Kutta method of order $4$. 
+%
+%%\item Adam-Bashforth method of order $2$ (use exact solution to
+%%start the method):
+%
+%\end{enumerate}
+%
+%Use step size $h=0.1$, then repeat with $h=0.05$, $0.001$. In
+%cases (a)--(c), perform the first 2 steps by hand (i.e. compute
+%$y_1$ and $y_2$ by hand). Write a small program to find the
+%solution at $x=1$. Find the exact solution, compute the error and
+%${\rm error}/h^p$ for the various step sizes, where $p=1$, $2$ and
+%$4$ in the respective cases. Analyze your results.
+
+{(\bf Multistep Methods: see Section 7.5)}
+
+
+%\begin{enumerate}
+
+
+\item {(\bf Two-step Adams-Moulton method)} Derive the two-step Adams-Moulton method by constructing a quadratic interpolating polynomial through $(t_{n-1},f_{n-1})$, $(t_{n},f_{n})$ and $(t_{n+1},f_{n+1})$, where $f_k=f(y_k)$, and integrating it from $t_n$ to $t_{n+1}$:
+%
+\[
+u_{n+1}=u_n+\frac{h}{12}\left[5f(t_{n+1},u_{n+1})+8f(t_{n},u_{n})-f(t_{n-1},u_{n-1})\right]
+\]
+%
+What is the truncation error term associated with this method?
+
+
+\item {(\bf Trapezoidal method)} Derive the trapezoidal method for solving IVPs (i.e. the Adams-Moulton one step method):
+%
+\[
+u_{n+1}=u_n+\frac{h}{2}\left[f(t_{n+1},u_{n+1})+f(t_{n},u_{n}))\right]
+\]
+%
+What is the truncation error term associated with this method?
+
+\item {(\bf Least-Squares Method (see Section 5.8))}
+
+Experimental data relating the oxide thickness, measured in Angstroms, of a thin film to the baking time of the film, measured in minutes, is given in the table below (see problem \# 4 on page 426).
+
+\medskip
+
+\begin{tabular}{ccccccccccc}
+\hspace*{-50pt}Baking time & 20 & 30 & 40 & 60 & 70 & 90 & 100 & 120 & 150 & 180 \\[5pt]
+%\hline
+\hspace*{-32pt}Oxide thickness & 3.5 & 7.4 & 7.1 & 15.6 & 11.1 & 14.9 & 23.5 & 27.1 & 22.1 & 32.9
+\end{tabular}
+%
+\medskip
+
+\begin{enumerate}
+
+\item Construct a scatter plot of this data. What functional form is most appropriate for fitting this data?
+
+\item Fit the data to the function indicated in part (a). What physical significance do the model parameters have?
+
+\item Predict the oxide thickness for a film which is baked for 45 minutes.
+\end{enumerate}
+
+%\newpage
+
+%\item  \textbf{(Richardson Extrapolation Applied to Differentiation)} 
+%\begin{enumerate}
+%\item Suppose that $N(h)$ is an approximation to $M$ for every
+%$h>0$ and that
+%\[
+%M=N(h)+K_{1}h^{1}+K_{2}h^{2}+K_{3}h^{3}+\ldots
+%\]
+%for some constants $K_{1}$, $K_{2}$, $K_{3}$, $\ldots$. Use the
+%values $N(h)$, $N(\frac{h}{3})$, and $N(\frac{h}{9})$ to produce
+%an ${\mathcal{O}}(h^{3})$ approximation to $M$.
+%
+%\item Recall that
+%\[
+%\frac{df(x_{0})}{dx}=\frac{f(x_{0}+h)-f(x_{0})}{h}+
+%\sum_{i=2}^{\infty}\frac{h^{i-1}}{i!}f^{(i)}(x_{0})~.
+%\]
+%Use the formula you constructed in part (a) to construct an
+%$O(h^{3})$ approximation to $\frac{df(x_{0})}{dx}$.
+%\end{enumerate}
+%
+
+\medskip
+
+{\bf Suggested  /  Additional Problems for Math 529 / Phys 528 students}:
+
+\item {(\bf Shooting Method (see Sections 8.4 and 8.5))}
+
+Suppose we use the nonlinear shooting method to approximate the solution of the given boundary value problem (see problem \# 1 on page 722). Write out the initial value problem that must be solved and the objective function for the corresponding rootfinding problem.
+%
+\[
+y''+(y')^2=1, \quad y(0)=1, \ y(1)=2
+\]
+
+%\medskip
+
+%{\bf Additional Problems for Phys 528 students}:
+
+\item {({\bf Absolute Stability and Stiff Equations: Section 7.9})}
+%\item{{\bf Suggested / Additional problem for Phys 528 students}}:
+
+Compare the approximate solutions of the initial value problem (see problem \# 16, pg. 654)
+%
+\[
+y'=5\e^{5t}(y-t)^2+1, \quad y(0)=1
+\]
+%
+obtained using
+
+\begin{enumerate}
+
+\item the trapezoid method;
+
+\item the backward Euler method;
+
+\item the second-order backward differentiation formula;
+
+\item the classical fourth-order Runge-Kutta method.
+
+\end{enumerate}
+
+Use the step size $h=0.25$ for all methods and advance each solution out to $t=1$. The exact solution of the initial value problem is $y(t)=t-\e^{-5t}$.
+
+\begin{enumerate}
+
+\item Starting with only one subinterval, construct the four row  Romberg integration table for $\int_{3}^{3.5} \frac{x}{\sqrt{x^2-4}}dx$ (see problem \# 8, pg. 503).
+
+\item What is the error estimate for the final approximation? How does this compare with the actual error?
+
+\item How many subintervals would have been necessary to achieve the same accuracy using the composite trapezoid rule without extrapolation?
+
+\end{enumerate}
+
+\item \textbf{Three-step Adams-Bashforth method} 
+
+Construct the quadratic interpolation polynomial through
+$(t_{n-2},f_{n-2})$, $(t_{n-1},f_{n-1})$ and $(t_n,f_n)$, where
+$f_k=f(y_k)$. Integrate this polynomial from $t_n$ to $t_{n+1}$
+to obtain the  three-step Adams-Bashforth method.
+\[
+u_{n+1}=u_n+\frac{h}{12}\left[23f(t_{n},u_{n})-16f(t_{n-1},u_{n-1})+5f(t_{n-2},u_{n-2})\right]
+\]
+
+
+\end{enumerate}
+
+\end{document}
+

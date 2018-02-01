@@ -1,0 +1,360 @@
+\documentclass [12pt]{article}
+\setlength{\topmargin}{-0.5cm} \setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm} \setlength{\textwidth}{6in}
+\setlength{\textheight}{9in}
+
+\usepackage{latexsym,fleqn}
+\usepackage{graphicx}
+
+\begin{document}
+
+\def\e{\mathop{\rm e}\nolimits}
+\noindent
+\begin{center}
+{ \bf  {Math/Phys/Engr 428, Math 529/Phys 528 \\
+Numerical Methods - Spring 2018 }}\\[7pt]
+\underline{\bf Homework 1}\\
+
+%Assigned: Friday, January 20, 2012\\
+Due: {\bf Friday, January 26, 2018}
+
+\end{center}
+
+\begin{itemize}
+  \item Include a cover page and a problem sheet.
+
+  \item Always clearly label all plots (title, $x$-label, $y$-label,
+    and legend).
+
+  \item Use the {\tt subplot} command from MATLAB when comparing 2 or
+    more plots to make comparisons easier and to save paper.
+
+  \item Include all of your script.
+
+  \item Place a comment at the top of each function
+    or script that you submit which includes the name of the
+    function or script, your name, the date and MATH 428, PHYS 428, ENGR 428 or MATH 529, PHYS 528.
+
+\end{itemize}
+
+%\noindent {\bf BOOK PROBLEMS:}  \#6 pg.40, \#12 pg.52 \\
+
+%\noindent {\bf ADDITIONAL PROBLEMS:} \\
+
+\noindent {\bf PROBLEMS:}
+
+\begin{enumerate}
+
+\item Do the following calculations by hand.
+
+\smallskip
+(a) Convert to base 10: $(1011011.001)_2$
+
+\smallskip
+(b) Convert to base 2: $(2018)_{10}$
+
+\item The floating point representation of a real number is $x=\pm
+(0.d_{1}d_{2}\ldots d_{n})_\beta\cdot \beta^e$, where
+$d_{1}\not=0$, $-M\leq e\leq M$. Suppose that $\beta=2$, $n=6$,
+$M=5$.
+
+\begin{enumerate}
+
+\item Find the smallest (positive) and largest floating point
+numbers that can be represented. Give the answers in decimal form.
+
+\item Find the floating point number in this system which is
+closest to $\pi$.
+
+\end{enumerate}
+
+\item Near certain values of $x$ each of the following functions
+cannot be accurately  computed using the formula as given due to
+cancellation error. Identify the values of $x$ which are involved
+(e.g. near $x=0$ or large positive $x$) and propose a
+reformulation of the function (e.g., using Taylor series,
+rationalization, trigonometric identities, etc.) to remedy the
+problem. This is problem \# 12 from the textbook. Please also see pages 48-49 for examples and more details.
+
+\[
+\begin{array}{ll}
+\mbox{\bf (a)} \ f(x)=1+\cos x & \hspace{50pt} \mbox{\bf (b)} \
+f(x)=\e^{-x}+\sin x-1 \\
+\mbox{\bf (c)} \ f(x)=\ln x-\ln(1/x) & \hspace{50pt} \mbox{\bf
+(d)} \
+f(x)=\sqrt{x^2+1}-\sqrt{x^2+4} \\
+\mbox{\bf (e)} \ f(x)=1-2\sin^2x & \hspace{50pt} \mbox{\bf (f)} \
+f(x)=\ln(x+\sqrt{x^2+1}) %\\
+%\mbox{\bf (g)} \ f(x)=x-\sin x & \hspace{50pt} \mbox{\bf (h)} \
+%f(x)=\ln x-1 \\
+\end{array}
+\]
+
+%\item 
+% Consider the function $f(x)=1+\cos(x+2)$, $x_0=0$. Approximate the
+% derivative $f'(x_0)$ by computing $Df=\frac{f(x_0+h)-f(x_0-h)}{2h}$
+% for a sequence of increasing small $h$ values, for example,
+% $h=10^{-n}$, $n=1,\ldots,25$. Plot the error against $h$ using the logarithmic scale (use command {\tt loglog} instead of {\tt plot}) and
+% explain your observations. 
+% What is the theoretical order of accuracy (rate of convergence) of this approximation? Make a table with the following information.
+% 
+%{\small
+%\begin{tabular}{|c|c|c|c|c|c|c|}
+%\hline
+% n & $h$  & $Df$ & $f'(0)-Df$ & $(f'(0)-Df)/h$ & $(f'(0)-Df)/h^2$ & $(f'(0)-Df)/h^3$\\
+% \hline
+%\end{tabular}
+%}\\\\
+%\noindent Discuss the results and determine numerically the
+%order of accuracy. Does it agree with the theoretically predicted one? Do you observe the effect of the loss of precision? If yes, what is the reason of this?
+
+%
+%\item Some problems using Taylor polynomials.
+
+%\begin{enumerate}
+
+%\item Consider a function $f(x)=\ln{x}$. Find the fourth order
+%Taylor polynomial about the point $x_0=2$. Then determine the
+%minimum number of terms (i.e. $n$) that would guarantee an
+%absolute error of no more than $10^{-3}$ in the Taylor
+%approximation for $f(x)$ for all $x$ in the interval $[1, \, 2]$.
+
+%
+%\item Show that
+
+%\[
+%f''(x)=\frac{f(x-h)-2f(x)+f(x+h)}{h^2}+O(h^2)
+%\]
+%for sufficiently small $h$ by expanding $f(x\pm h)$ out to at
+%least fourth order using Taylor polynomials.
+
+%\end{enumerate}
+
+%\item Compute the following limits and determine the corresponding rates of convergence.
+%\begin{enumerate}
+%\item $\lim_{n\to\infty}$ $\frac{n^2+1}{n^5-2n}$
+%\item $\lim_{n\to\infty}$ $\left(\sqrt{n+1}-\sqrt{n}\right)$
+%\item $\lim_{n\to\infty}$ $\frac{\sin n}{n}$ 
+%\end{enumerate}
+
+\item The following algorithm
+
+step 1: $x_0 := x$; $j:=0$
+
+step 2: {\it while $x_j \not= 0$, do}
+
+\hskip 60pt $a_j :=$ remainder of integer divide $x_j/2$
+
+\hskip 60pt $x_{j+1} :=$ quotient of integer divide $x_j/2$
+
+\hskip 60pt $j:=j+1$
+
+\hskip 40pt {\it end while}
+
+\noindent can be used to convert a positive decimal integer $x$ to
+its binary equivalent,
+$$x=(a_na_{n-1}\cdots a_1a_0)_2.$$
+
+%$$x=a_n\cdot 2^n +a_{n-1}\cdot 2^{n-1} +\cdots + a_1\cdot 2^1 +a_0\cdot 2^0$$
+
+\smallskip
+\noindent Implement the algorithm (write a computer program) and
+apply it to convert the following integers to their binary
+equivalents.
+
+(a) 56 \hskip 15pt (b) 1543
+
+\bigskip
+
+\smallskip
+\noindent (The Matlab library functions {\it rem}, {\it mod} and
+{\it floor} might be helpful when you use Matlab. Try {\bf help
+rem}, {\bf help mod} and {\bf help floor} to see how to use them.)
+
+\bigskip
+
+\hspace*{-15pt}
+{\bf  Finite Precision Arithmetic}
+%\begin{enumerate}
+
+\item Use three-digit rounding arithmetic to compute the following
+sums (sum in the given order):
+
+\[
+\mbox{\bf(a)} \quad \sum_{k=1}^6\frac{1}{3^k} \qquad \qquad
+\mbox{\bf(b)} \quad \sum_{k=1}^6\frac{1}{3^{7-k}}
+\]
+
+\underline{Hint}: use floating point representation, e.g. $\frac{1}{3^6}=0.001371742112483 \approx 0.137\times 10^{-2}$ but not $0.001$; answers in (a) and (b) should be slightly different. 
+
+\bigskip
+
+\hspace*{-15pt}
+{\bf Finite-Difference Approximation}
+
+\item Let $f(x)$ be a given function and recall the forward difference approximation of $f'(x)$:
+%
+\[
+D_+f(x)=\frac{f(x+h)-f(x)}{h},
+\]
+%
+where $h>0$ is the step size.
+
+{\bf }
+
+\begin{enumerate}
+
+\item Take $f(x)=\sin x$, $x=\pi/4$, $h=2^{-n}$ for $n=1,2,\ldots,6$. Following example in class, plot the error versus $h$ (use command {\tt loglog} instead of {\tt plot}) and make a table with the following information: 
+
+\medskip
+
+%column 1: $h$, column 2: $D_+f(x)$, column 3: $f'(x)-D_+f(x)$, column 4: $\biggl(f'(x)-D_+f(x)\biggr)/h$, column 5: $\biggl(f'(x)-D_+f(x)\biggr)/h^2$:  
+
+{\small
+\hspace*{-20pt}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$h$  & $D_+f$ & $f'(\frac\pi 4)-D_+f$ & $(f'(\frac\pi 4)-D_+f)/h$ & $(f'(\frac\pi 4)-D_+f)/h^2$ & $(f'(\frac\pi 4)-D_+f)/h^3$\\
+ \hline
+\end{tabular}
+}\
+
+You may modify the Matlab code shown in class. Present at least eight decimal digits (type ``{\tt format long}" in Matlab to get the full 15 digits). 
+
+\item Repeat for central difference approximation,
+%
+\[
+D_0f(x)=\frac{f(x+h)-f(x-h)}{2h},
+\]
+%
+which also approximates $f'(x)$. Which approximation is more accurate? Explain why.
+\end{enumerate}
+
+\item The forward and backward finite-difference operators are defined by
+%
+\[
+D_+f(x)=\frac{f(x+h)-f(x)}{h}, \qquad D_-f(x)=\frac{f(x)-f(x-h)}{h}.
+\]
+%
+
+\begin{enumerate}
+
+\item Show that $\displaystyle D_+D_-f(x)=\frac{f(x+h)-2f(x)+f(x-h)}{h^2}$.
+
+\item Use Taylor expansions and the result in part (a) to show that $D_+D_-f(x)=f''(x)+O(h^2)$. Find the asymptotic error constant.
+
+\end{enumerate}
+
+\hspace*{-15pt}
+{\bf Rootfinding}
+
+\item Consider $f(x) = x^2 - 5$. Since $f(2) < 0$, $f(3) > 0$, it follows that $f(x)$ has a root $p$ in the
+interval $(2, 3)$. Compute an approximation to $p$ by the following methods. Take $10$ steps in
+each case. Use Matlab and print the answers to $15$ digits.
+
+\begin{enumerate}
+
+\item bisection method, starting interval $[a, b] = [2, 3]$;
+
+\item fixed-point iteration with $g_1(x) = 5/x$ and $g_2(x) = x - f(x)/3$, starting value $x_0 = 2.5$;
+
+\item Newton's method, starting value $x_0 = 2.5$.
+
+\end{enumerate}
+
+Present the results in a table with columns as below for each method. Do the results agree
+with the theory discussed in class?
+
+\hspace*{20pt} column 1 : $n$ (step)
+\\[5pt]
+\hspace*{20pt}  column 2 : $x_n$ (approximation)
+\\[5pt]
+\hspace*{20pt}  column 3 : $f(x_n)$  (residual)
+\\[5pt]
+\hspace*{20pt}  column 4 : $|p - x_n|$  (error)
+
+\item Consider the function $g(x)=2x(1-x)$.
+
+\begin{enumerate}
+
+\item Verify $x=0$ and $x=1/2$ are fixed points of $g(x)$.
+
+\item Why should we expect that fixed point iteration, starting even with a value very close to zero, will fail to converge toward $x=0$?
+
+\item Why should we expect that fixed point iteration, starting with $p_0\in(0,1)$ will converge toward $x=1/2$? What order of convergence should we expect?
+
+\item Perform seven iterations starting from an arbitrary $p_0\in(0,1)$ and numerical confirm the order of convergence.
+
+\end{enumerate}
+
+%\end{enumerate}
+
+%\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%
+
+\smallskip
+\noindent {\it (Please include your program for completeness.)}
+
+%\end{document}
+
+%\newpage
+\bigskip
+
+\item{{\bf Suggested / Additional problems for Math 529/Phys 528 students}}: 
+
+\begin{enumerate}
+
+\item Plot the function $f(x)=1-\cos x$ over the interval $-5\times 10^{-8}\leq x\leq 5\times 10^{-8}$. Generate points at 1001 uniformly spaced abscissas and perform all calculations in IEEE standard double precision (in Matlab, for example).
+
+\item Reformulate $f$ to avoid cancellations error and then repeat part (a).
+\end{enumerate}
+
+\item %{{\bf Suggested / Additional problem for Phys 528 students}}: 
+
+Verify that $x=\sqrt{a}$ is a fixed point of the function
+%
+\[
+g(x)=\frac 12 \left(x+\frac ax\right).
+\]
+%
+Use the techniques of Section 2.3 to determine the order of convergence and the asymptotic error constant of the sequence $p_n=g(p_{n-1})$ toward $x=\sqrt a$.
+
+\end{enumerate}
+
+\end{document}
+
+
+\item  Let $f(x)=\cos(x+2)$. Compute $f'(0)$ using the difference
+quotients given below and step-size $h=2^{-n}$, $n=1,\ldots,5$.
+
+\begin{tabular}{ll}
+\mbox{a)} & $D_+f=\biggl(f(x+h)-f(x)\biggr)/h$ \\[10pt]
+\mbox{b)} & $D_0f=\biggl(f(x+h)-f(x-h)\biggr)/2h$
+\end{tabular}
+
+For each difference formula, make a table which contains the
+following information.
+
+\begin{tabular}{ll}
+\mbox{column 1:} & $h$ \\[5pt]
+\mbox{column 2:} & $Df$ \\[5pt]
+\mbox{column 3:} & $f'(0)-Df$ \\[5pt]
+\mbox{column 4:} & $(f'(0)-Df)/h$ \\[5pt]
+\mbox{column 5:} & $(f'(0)-Df)/h^2$ \\[5pt]
+\mbox{column 6:} & $(f'(0)-Df)/h^3$
+\end{tabular}
+
+\noindent Discuss your results (\underline{Hint}: order of
+convergence).
+
+\item  Show that $D_+D_-f=f''(x)+O(h^2)$, where
+
+\[
+D_+=\frac{f(x+h)-f(x)}{h}, \qquad  D_-=\frac{f(x)-f(x-h)}{h}
+\] \[
+D_+D_-f=\displaystyle \frac{f(x-h)-2f(x)+f(x+h)}{h^2}
+\]
+
+\underline{Hint:} Expand $f(x \pm h)$ for sufficiently small $h$
+to at least fourth order using Taylor polynomials.

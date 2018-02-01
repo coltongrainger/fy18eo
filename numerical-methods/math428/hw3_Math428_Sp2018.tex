@@ -1,0 +1,421 @@
+\documentclass [12pt]{article}
+\setlength{\topmargin}{-0.5cm} \setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm} \setlength{\textwidth}{6in}
+\setlength{\textheight}{9in}
+
+\usepackage{latexsym,fleqn}
+\usepackage{graphicx}
+\usepackage{amsmath,amsthm,amsfonts,amscd}
+
+\begin{document}
+
+\def\e{\mathop{\rm e}\nolimits}
+\font\bb=msbm10 scaled \magstep1 % Blackboard bold for real numbers field
+                                 % and matrices
+\def\R{\hbox{\bb R}}
+
+\noindent
+\begin{center}
+{ \bf  {Math/Phys/Engr 428, Math 529/Phys 528 \\
+Numerical Methods - Spring 2018 }}\\[7pt]
+\underline{\bf Homework 3}\\
+
+%Assigned: Friday, January 20, 2012\\
+Due: {\bf Wednesday, February 28, 2018}
+
+\end{center}
+
+\begin{enumerate}
+
+\item   \textbf{(Vector and Matrix Norms)}
+
+%Suppose that $A\in \R^{n\times n}$ is invertible, B is an estimate
+%of $A^{-1}$, and $AB=I+E$. Show that the relative error in $B$ is
+%bounded by $\| E\|$ (using an arbitrary matrix norm).
+
+  Show that the $l_{1}$ vector norm satisfies the three
+          properties
+          \begin{enumerate}
+          \item $||x||_1\geq 0$ for $x \in \R^n$ and  $||x||_1= 0$ if and only if $x=0$
+          \item $|| \lambda x||_1 = | \lambda | \; ||x||_1$ for $\lambda \in \R$ and
+               $x \in \R^n$
+          \item $|| x + y||_1 \leq ||x||_1+||y||_1$ \ for  $x,y \in \R^n$
+          \end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item   \textbf{(Pivoting)}
+
+\begin{enumerate}
+\item   Prove that the matrix
+$$
+\begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix}
+$$
+does not have an $LU$ decomposition. \underline{Hint}: assume that such decomposition exists and then show that this brings a contradiction.
+
+\item   Does the system
+$$
+\begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix} \
+\begin{pmatrix} x \\ y \end{pmatrix} \ = \
+\begin{pmatrix} a \\ b \end{pmatrix}
+$$
+have a unique solution for all $a,b \in \mathbb{R}$? (Why?)
+
+\item   How can you modify the system in part (b) so that $LU$
+decomposition applies?
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Problem 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item \textbf{(Partial Pivoting)}
+
+{Consider the linear system, $Ax=b$,}
+     where $A$ is the following matrix,
+     \begin{center}
+               $A=\left (
+        \begin{array}{rrr}
+        -5  &   2  &   -1   \\
+        1  &   0  &   3   \\
+        3  &   1  &   6
+        \end{array}
+        \right )~.~$
+    \end{center}
+
+    \begin{enumerate}
+    \item{Using {\bf partial pivoting technique},
+    determine the $P$, $L$, $U$ decomposition of the matrix $A$, such that
+    $PA = LU$. (Show {\bf EACH STEP} in the decomposition.) }
+    \item{Use the $P$, $L$, $U$ decomposition found in (a) to find the solution to \\
+    $Ax=\left ( \begin{array}{r} 2\\ -2\\ 1 \end{array} \right )$
+    (Show {\bf ALL} relevant steps).}
+    \item{Use the $P$, $L$, $U$ decomposition found in (a) to find the solution to \\
+    $Ax=\left ( \begin{array}{r} 0\\ 1\\ 5  \end{array} \right )$
+    (Show {\bf ALL} relevant steps).}
+    \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Problem 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item \textbf{(Partial Pivoting: MATLAB program)}
+
+Write a program to find the $LU$ decomposition of a given $n
+\times n$ matrix $A$ using {\bf partial pivoting}. The program
+should return the updated matrix $A$ and the pivot vector $p$. In MATLAB, name your file mylu.m, the first few lines
+of which should be as follows:
+\begin{verbatim}
+function [a,p]=mylu(a)
+%
+[n n]=size(a); p=(1:n)'; (your code here!)
+\end{verbatim}
+The code above sets $n$ equal to the dimension of the matrix and
+initializes the pivot vector $p$. Make sure to store the
+multipliers $m_{ij}$ in the proper matrix entries.  For more help
+on function m-files see pages $9-13$ of the MATLAB Primer    
+by Kermit Sigmon
+available from the course webpage. You should experiment with a
+few small matrices to make sure your code is correct. Check if
+matrices resulting in $LU$ decomposition satisfy $PA=LU$. As a
+test of your code, in MATLAB execute the statements
+\begin{verbatim}
+>>diary mylu.txt
+>>format short e
+>>type mylu.m
+>>a=[2 2 -3;3 1 -2;6 8 1];
+>>[a,p]=mylu(a)
+>>diary off
+\end{verbatim}
+{\bf Print and hand-in the text file containing your program.}
+
+
+\item 
+\begin{enumerate}
+
+\item Consider the matrix
+$$
+A= \left[
+   \begin{array}{rrr}
+    2 & -3 & 1 \\
+   -4 &  1 & 2 \\
+    5 &  0 & 1
+   \end{array} \right] \,.
+$$
+Compute $\|A\|_\infty$ and
+find a vector $x$ such that
+$\|A\|_\infty = \|Ax\|_\infty / \|x\|_\infty$.
+
+\item Find an example of a $2 \times 2$ matrix $A$ such that
+$\|A\|_\infty =1$ but $\rho (A)=0$. This shows that the spectral
+radius $\rho (A)=\{\max{|\lambda|: \ \lambda \mbox{ is an
+eigenvalue of } A}\}$ {\bf does not} define a matrix norm.
+
+\end{enumerate}
+
+\item
+ Consider the matrix, right side vector,
+and two approximate solutions
+$$
+A=\begin{pmatrix}
+            1.2969& 0.8648 \\
+            0.2161& 0.1441
+   \end{pmatrix} ~,~
+b=\begin{pmatrix}
+            0.8642 \\
+            0.1440
+   \end{pmatrix} ~,~
+x_1 =\begin{pmatrix}
+               0 \\
+               1
+   \end{pmatrix} ~,~
+x_2 =\begin{pmatrix}
+               0.9911 \\
+               -0.4870
+   \end{pmatrix} ~.
+$$
+
+\begin{enumerate}
+
+\item
+Show that $x=(2,-2)^T$ is the exact solution of $Ax=b$.
+
+\item
+Compute the error and residual vectors for
+$x_1$ and $x_2$.
+
+\item
+Find $||A||_\infty , ||A^{-1}||_\infty$
+and $\hbox{cond}_\infty (A)$ (you may use MATLAB for this calculation).
+
+\item
+In class we proved a theorem relating
+the condition number of $A$,
+the relative error,
+and the relative residual.
+Check this result for the two approximate solutions
+$x_1$ and $x_2$.
+
+%\item
+%An $n \times n$  matrix $A$ is said to be
+%{\it strictly diagonally dominant} if
+%$$
+%\sum_{j = 1, \; j \neq i}^n \left| a_{ij} \right|
+%< \left| a_{ii} \right| \qquad \mbox{for} \ i=1,\ldots,n \,.
+%$$
+%Note that the strict inequality implies that each diagonal entry
+%$a_{ii}$ is non-zero.
+%Suppose that $A$ is strictly diagonally dominant.
+%Show that the Jacobi iteration matrix satisfies
+%$||B_J ||_\infty < 1$ and therefore that Jacobi iteration converges
+%in this case.
+
+\end{enumerate}
+
+
+\item \textbf{(LU factorization)}
+
+\begin{enumerate}
+
+\item
+Write a program that takes the output $A$ and $p$ from  problem \# 4, along with a righthand side $b$, and computes the solution
+of $Ax=b$ by performing the forward and backward substitution
+steps.  If you are using MATLAB, name your m-file lusolve.m.
+The first line of your code lusolve.m should be
+as follows:
+\begin{verbatim}
+function x=lusolve(a,p,b)
+(your code here!)
+\end{verbatim}
+{\bf Turn in a copy of your code}.
+
+\item
+The famous Hilbert matrices are given
+by $H_{ij}=1/(i+j-1)$. The $n \times n$ Hilbert matrix $H_n$ is easily
+produced in MATLAB using {\it hilb(n)}.  Assume the true solution of
+$H_nx=b$ for a given $n$ is $x={[1, \ldots ,1]}^T$.
+Hence the righthand side $b$ is simply the row sums of $H_n$,
+and  $b$ is easily computed in MATLAB using {\it b=sum(hilb(n)')'}.
+Use your codes mylu.m and lusolve.m to
+solve the system $H_n x=b$ for $n=5, 10, 15, 20$.  For each $n$,
+using the $\infty-\mbox{norm}$, compute the relative error and
+the relative residual.  Discuss what is happening here.  You may
+find it useful to look at the {\it cond} command in MATLAB.
+
+\end{enumerate}
+
+\item  \textbf{(Iterative Methods: Analysis).}
+
+Recall that an $n \times n$  matrix $A$ is said to be {\it
+strictly diagonally dominant} if
+$$
+\sum_{j = 1, \; j \neq i}^n \left| a_{ij} \right| < \left| a_{ii}
+\right| \qquad \mbox{for} \ i=1,\ldots,n \,.
+$$
+Note that the strict inequality implies that each diagonal entry
+$a_{ii}$ is non-zero. Suppose that $A$ is strictly diagonally
+dominant.
+
+\begin{enumerate}
+
+\item Show that the Jacobi iteration matrix satisfies $||B_J
+||_\infty < 1$ and, therefore, Jacobi iteration converges in this
+case.
+
+\item For a $2\times 2$ matrix $A$, show that the Gauss-Seidel
+iteration matrix also satisfies $||B_{GS} ||_\infty < 1$ and,
+hence, Gauss-Seidel iteration converges as well.
+
+\end{enumerate}
+
+\item \textbf{(from Mathews--Fink 2004)}
+
+The Rockmore Corp. is the considering the purchase of a new
+computer and will choose either the DoGood 174 or the MightDo 11.
+They test both computers' ability to solve the linear system
+%
+\[
+\begin{array}{l}
+\displaystyle
+ 34 x + 55 y - 21 = 0 \\[5pt]
+ 55 x + 89 y - 34 = 0
+\end{array}
+\]
+The DoGood 174 computer gives $x=-0.11$ and $y=0.45$, and its
+check for accuracy is found by substitution:
+%
+\[
+\begin{array}{l}
+\displaystyle
+ 34 (-0.11) + 55 (0.45) - 21 = 0.01 \\[5pt]
+ 55 (-0.11) + 89 (0.45) - 34 = 0.00
+\end{array}
+\]
+The MightDo 11 computer gives $x=-0.99$ and $y=1.01$, and its
+check for accuracy is found by substitution:
+%
+\[
+\begin{array}{l}
+\displaystyle
+ 34 (-0.99) + 55 (1.01) - 21 = 0.89 \\[5pt]
+ 55 (-0.99) + 89 (1.01) - 34 = 1.44
+\end{array}
+\]
+Which computer gave the better answer? Why?
+
+\bigskip
+
+%\newpage
+
+{\bf Suggested / Additional problems for Math 529 / Phys 528 students}:
+
+\item \textbf{(Special Matrices)}
+
+Consider the matrix
+
+\[
+\begin{pmatrix}
+b & -1 & 0 \cr -1 & 4 & 1 \cr 0 & 1 & 5
+\end{pmatrix}.
+\]
+
+\begin{enumerate}
+
+\item For what values of $b$ will this matrix be positive
+definite? (\underline{Hint}: theorem on page 215 on leading principal submatrices may be useful.)
+
+\item For what values of $b$ will this matrix be  strictly
+diagonally dominant? (Recall that an $n \times n$  matrix $A$ is
+said to be {\it strictly diagonally dominant} if
+$$
+\sum_{j = 1, \; j \neq i}^n \left| a_{ij} \right| < \left| a_{ii}
+\right| \qquad \mbox{for} \ i=1,\ldots,n \,.
+$$
+Note that the strict inequality implies that each diagonal entry
+$a_{ii}$ is non-zero.)
+
+\end{enumerate}
+
+\item    Consider a linear system with matrix
+$$
+A = 
+\begin{pmatrix}
+2 & 1 \cr 1 & 4
+\end{pmatrix}
+$$
+\begin{enumerate}
+\item  Write down the iteration matrices $B_{J}$ and $B_{GS}$ for
+Jacobi's Method and
+Gauss--Seidel.%  Write down the iteration matrix $T_{\rm sor}$ for SOR with parameter $\omega = 1.5$.
+
+\item  Find the $l_\infty$ norm and spectral radius of the
+iteration matrix for Jacobi and Gauss-Seidel. (Recall that the
+spectral radius of a matrix can be calculated by finding the roots
+of its characteristic polynomial.)
+
+\item  Which of the two iterative methods will converge for an
+arbitrary starting point $x^{(0)}$?  Why?
+
+\item  Write a program to calculate and plot the spectral radius
+of $B_{\rm sor}(\omega)$ for parameter $\omega$ in the range $(0,
+2)$ in increments of 0.01.  Provide the code and the plot. Based
+on inspection of the graph, what value of $\omega$ will lead to
+the fastest convergence?
+
+\item  Use the theorem on page 234 of Bradie to calculate
+analytically the optimal relaxation parameter $\omega$ for SOR.
+Does it match the value predicted in Part (d)?
+\end{enumerate}
+
+
+
+\item  \textbf{Matrix Norms}
+
+\begin{enumerate}
+
+\item Prove that if $|| A || < 1$,
+    %(using $l_\infty$ or $l_1$ norm)
+     then
+        $$
+            || (I-A)^{-1}|| \geq \frac{1}{1+ ||A||} ~.~
+        $$
+
+\item
+Suppose that $A\in \R^{n\times n}$ is invertible, B is an estimate
+of $A^{-1}$, and $AB=I+E$. Show that the relative error in $B$ is
+bounded by $\| E\|$ (using an arbitrary matrix norm).
+
+\end{enumerate}
+
+%{\bf }
+
+\item{{\bf(Cholesky decomposition)} (Cholesky decomposition can be used for symmetric positive definite matrices (see pages 215-217 of the textbook).)})
+
+\begin{enumerate}
+
+\item Compute the Cholesky decomposition for matrix
+%
+\[
+\begin{pmatrix}
+16 & -28 & 0 \cr
+-28 & 53 & 10 \cr
+0 & 10  & 29  
+\end{pmatrix}
+\]
+
+%\item Show that the computation of a Cholesky factorization for an $n\times n$ matrix requires $\frac 13 n^3+\frac 12 n^2-\frac 56n$ arithmetic operations plus $n$ square roots.
+
+\item Construct an algorithm to perform forward and backward substitution on the system $Ax=b$, given a Cholesky decomposition $A=LL^T$ for the coefficient matrix. How many arithmetic operations are required by the algorithm?
+
+\item Solve the system $Ax=b$ with $b=\begin{pmatrix}8 & -2 & 38\end{pmatrix}^T$ and the above matrix $A$ by using the Cholesky decomposition and then performing forward and backward substitution.
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
+
