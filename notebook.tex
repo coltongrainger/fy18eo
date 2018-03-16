@@ -1,0 +1,735 @@
+
+
+
+
+    
+    \documentclass[titlepage,11pt]{article}
+    
+    
+    
+    %\usepackage{fancybox}
+    \usepackage[breakable]{tcolorbox}
+    \tcbset{nobeforeafter}
+    \usepackage{needspace}
+    
+    \usepackage[T1]{fontenc}
+    \usepackage{fourier}
+    \usepackage{parskip}
+    \setcounter{secnumdepth}{0}
+    
+    \usepackage{graphicx}
+    
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+   
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Define a variable length
+    \newlength{\mylength}
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+
+    % Header Adjustements
+    \renewcommand{\paragraph}{\textbf}
+    \renewcommand{\subparagraph}[1]{\textit{\textbf{#1}}}
+    
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    
+%Reconfigured pygments
+\makeatletter
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[HTML]{008800}{##1}}} %numbers
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[HTML]{008800}{##1}}} %numbers
+\expandafter\def\csname PY@tok@nn\endcsname{\def\PY@tc##1{\textcolor[HTML]{000000}{##1}}} %imports
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[HTML]{008000}{##1}}} %in
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{\codetrue##1\codefalse}}} %operators
+\makeatother
+
+\newif\ifcode
+\codefalse
+\definecolor{purp}{HTML}{AA22FF}
+%If using XeLaTeX, use magic to highlight operators in purple.
+\ifdefined\XeTeXcharclass
+\XeTeXinterchartokenstate = 1
+\newXeTeXintercharclass \mycharclassPurple
+\XeTeXcharclass `\* \mycharclassPurple
+\XeTeXcharclass `\/ \mycharclassPurple
+\XeTeXcharclass `\+ \mycharclassPurple
+\XeTeXcharclass `\- \mycharclassPurple
+\XeTeXcharclass `\@ \mycharclassPurple
+\XeTeXcharclass `\% \mycharclassPurple
+\XeTeXcharclass `\& \mycharclassPurple
+\XeTeXcharclass `\| \mycharclassPurple
+\XeTeXcharclass `\! \mycharclassPurple
+\XeTeXcharclass `\< \mycharclassPurple
+\XeTeXcharclass `\> \mycharclassPurple
+\XeTeXcharclass `\~ \mycharclassPurple
+\XeTeXcharclass `\^ \mycharclassPurple
+\XeTeXcharclass `\? \mycharclassPurple
+
+\XeTeXinterchartoks 0 \mycharclassPurple   = {\bgroup\ifcode\color{purp}\else\fi}
+\XeTeXinterchartoks 4095 \mycharclassPurple = {\bgroup\ifcode\color{purp}\else\fi}
+
+\XeTeXinterchartoks \mycharclassPurple 0   = {\egroup}
+\XeTeXinterchartoks \mycharclassPurple 4095 = {\egroup}
+\fi %end magical operator highlighting
+%End Reconfigured Pygments
+
+   
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{grey}{HTML}{CFCFCF}
+    \definecolor{light-grey}{HTML}{F7F7F7}
+    
+    % needed definitions
+    \newif\ifleftmargins
+    \newlength{\promptlength}
+    % cell style settings
+    
+        \leftmarginsfalse
+    
+    
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    
+
+    \begin{document}
+
+    \pagenumbering{gobble}
+\title{Numerical Methods: HW 3}
+\date{\today}
+\author{Colton Grainger}
+\maketitle
+    \subsubsection{Prob 1}\label{prob-1}
+
+We show that the \(l_{1}\) vector norm satisfies three properties:
+
+\begin{itemize}
+\tightlist
+\item
+  \(||x||_1\geq 0\) for \(x \in \mathbf{R}^n\) and \(||x||_1= 0\) if and
+  only if \(x=0\)
+\item
+  \(|| \lambda x||_1 = | \lambda | \; ||x||_1\) for
+  \(\lambda \in \mathbf{R}\) and \(x \in \mathbf{R}^n\)
+\item
+  \(|| x + y||_1 \leq ||x||_1+||y||_1\) for \(x,y \in \mathbf{R}^n\)
+\end{itemize}
+
+\emph{Proof}.
+
+For any \(x \in \mathbf{R}^n\), we have
+\[||x||_1 = \sum_i |x_i| \geq |\sum_i x_i | \geq 0\] by the triangle
+inequality.
+
+Further,
+
+\begin{align*}
+  ||x||_1 = 0 &\iff \sum_i |x_i| = 0\\
+    &\iff x_i = 0 \text{ for all } i\\
+    &\iff x = 0.
+\end{align*}
+
+Next, for any \(\lambda \in \mathbf{R}\),
+
+\begin{align*}
+  ||\lambda x||_1 &= \sum_i |\lambda x_i|\\
+    &= \sum_i |\lambda| |x_i|\\
+    &= |\lambda| \sum_i |x_i|\\
+    &= |\lambda| ||x||_1.
+\end{align*}
+
+Lastly, for any \(y \in \mathbf{R}^n\), we have
+\[||x+y||_1 = \sum_i |x_i + y+i| \leq \sum_i (|x_i| + |y_i|) = \sum_i |x_i| + \sum_i |y_i| = ||x||_1 + ||y||_1\]
+since for all \(i\), \(|x_i + y_i| \leq |x_i + y_i|\).
+
+QED.
+
+    \subsubsection{Prob 2}\label{prob-2}
+
+We'll show that an LU-decomposition does not exist for the given matrix
+\(A = \begin{pmatrix} 0 & 1\\ 1 & 1 \end{pmatrix}.\)
+
+For contradiction, suppose there exist
+\(L, U \in \mathcal{M}_2(\mathbf{R})\) where \(L\) is lower triangular,
+\(U\) is upper triangular, and
+\[LU = \begin{pmatrix} 0 & 1\\ 1 & 1 \end{pmatrix}.\]
+
+Then we have \[\begin{pmatrix}
+  l_{11} & 0\\ l_{21} & l_{22}
+  \end{pmatrix}
+  \begin{pmatrix}
+  u_{11} & u_{12}\\ 0 & u_{22}
+  \end{pmatrix}
+  = 
+  \begin{pmatrix}
+  0 & 1\\ 1 & 1
+  \end{pmatrix}.\]
+
+But this statement represents an inconsistent system,
+
+\begin{align}
+  l_{11}u_{11} &= 0\\
+  l_{21}u_{11} &= 1\\
+  l_{21}u_{12} &= 1\\
+\end{align}
+
+as \(l_{11}u_{11} = 0 \iff (l_{11} = 0 \text{ or } u_{11} = 0)\) is
+inconsistent with \(l_{21}u_{11} = 1 \text{ and } l_{21}u_{12} = 1\).
+
+So the LU-decomposition of \(A\) does not exist.
+
+However, since \(\det A = -1 \neq 0\), there's a unique solution \(x\)
+to the system \(Ax = b\).
+
+We can find an LU-decomposition of the permuted matrix \(PA\) where
+\[P = \begin{pmatrix} 0 &1 \\ 1 & 0\end{pmatrix}.\]
+
+We obtain the unique solution \(x\) to the system
+\(Ax = b \iff PAx = Pb \iff LUx = Pb\):
+
+\begin{itemize}
+\tightlist
+\item
+  First produce \(y\) such that \(Ly = Pb\) by forward substitution,
+\item
+  then find \(x\) such that \(Ux = y\) by back substitution.
+\end{itemize}
+
+I claim \(x\) is the unique solution to \(Ax = b\), since
+
+\begin{align}
+  x = U^{-1}L^{-1}Pb &\iff Ax = AU^{-1}L^{-1}Pb\\
+    &\iff Ax = (P^{-1}LU)U^{-1}L^{-1}Pb\\
+    &\iff Ax = b.
+\end{align}
+
+    \subsubsection{Prob 3}\label{prob-3}
+
+To find the PLU-decomposition of the matrix \[A = 
+  \begin{pmatrix}
+    -5  &   2  &   -1   \\
+    1  &   0  &   3   \\
+    3  &   1  &   6
+  \end{pmatrix}\] we'll use Bradie's abbreviated notation, tracking the
+pivot operations \(P_i\) in \(\vec{r}\) and row reduction multipliers
+\(m_{ij}\) (negated and braced with parentheses) in situ of zero'd out
+elements.
+
+Pass 1 uses the pivot element \(a_{11} = -5\). \[\begin{pmatrix}
+    -5  &   2  &   -1   \\
+    (-1/5) &  2/5  &   14/5\\
+    (-3/5)  &   11/5 &   27/5
+  \end{pmatrix}
+  \quad
+  \vec{r} = \begin{pmatrix}1\\2\\3\end{pmatrix}.\]
+
+Pass 2 uses the pivot element \(a_{32} = 11/5\). \[\begin{pmatrix}
+    -5  &   2  &   -1   \\
+    (-1/5) &  (2/11) &  20/11\\
+    (-3/5)  &   11/5 &   27/5
+  \end{pmatrix}
+  \quad
+  \vec{r} = \begin{pmatrix}1\\3\\2\end{pmatrix}.\]
+
+It follows that \(PA = LU\), with \[L =
+  \begin{pmatrix}
+  1 & 0 & 0\\
+  -3/5 & 1 & 0\\
+  -1/5 & 2/11 & 1
+  \end{pmatrix},
+  \quad
+  U = 
+  \begin{pmatrix}
+  -5 & 2 & 1\\
+  0 & 11/5 & 27/5\\
+  0 & 0 & 20/11
+  \end{pmatrix},
+  \quad\text{and}\quad
+  P = 
+  \begin{pmatrix}
+  1 & 0 &0\\
+  0 &0&1\\
+  0&1&0
+  \end{pmatrix}.\]
+
+    
+\settowidth{\mylength}{\texttt{[5]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}5}]:} \PY{n}{A} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[6]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}pass 1}
+     \PY{n}{E1} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+     \PY{n}{E1}\PY{o}{*}\PY{n}{A}
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[6]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{outcolor}[{\color{outcolor}6}]:} [  -5    2   -1]
+     [   0  2/5 14/5]
+     [   0 11/5 27/5]
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[9]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}pass 2}
+     \PY{n}{P2} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+     \PY{n}{E2} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+     \PY{n}{U} \PY{o}{=} \PY{n}{E2}\PY{o}{*}\PY{n}{P2}\PY{o}{*}\PY{n}{E1}\PY{o}{*}\PY{n}{A}
+     \PY{n}{U}
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[9]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{outcolor}[{\color{outcolor}9}]:} [   -5     2    -1]
+     [    0  11/5  27/5]
+     [    0     0 20/11]
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[11]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}verifying the decomposition}
+      \PY{n}{L} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+      \PY{n}{P2}\PY{o}{*}\PY{n}{A} \PY{o}{==} \PY{n}{L}\PY{o}{*}\PY{n}{U}
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[11]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{outcolor}[{\color{outcolor}11}]:} True
+\end{Verbatim}
+    Now suppose that \(A\vec{x} = \vec{b}\) with \(\vec{b} = (2,-2,1)^T\).
+
+    
+\settowidth{\mylength}{\texttt{[17]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}17}]:} \PY{n}{b} \PY{o}{=} \PY{n}{vector}\PY{p}{(}\PY{n}{QQ}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+    To find \(\vec{x}\) given the PLU-decomposition of \(A\).
+
+    
+\settowidth{\mylength}{\texttt{[18]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{forwardsub}\PY{p}{(}\PY{n}{L}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+          \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{offset} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{o}{*}\PY{n}{x}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+              \PY{n}{elem} \PY{o}{=} \PY{p}{(}\PY{n}{b}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{offset}\PY{p}{)}\PY{o}{/}\PY{n}{L}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+              \PY{n}{x}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{elem}\PY{p}{)}
+          \PY{k}{return} \PY{n}{x}
+      
+      \PY{n}{y} \PY{o}{=} \PY{n}{forwardsub}\PY{p}{(}\PY{n}{L}\PY{p}{,}\PY{n}{P2}\PY{o}{*}\PY{n}{b}\PY{p}{)}
+      \PY{n}{y}
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[18]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{outcolor}[{\color{outcolor}18}]:} [2, 11/5, -2]
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[19]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{backsub}\PY{p}{(}\PY{n}{U}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+          \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{offset} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{o}{*}\PY{n}{x}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+              \PY{n}{elem} \PY{o}{=} \PY{p}{(}\PY{n}{b}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{offset}\PY{p}{)}\PY{o}{/}\PY{n}{U}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+              \PY{n}{x}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{elem}\PY{p}{)}
+          \PY{k}{return} \PY{n}{x}
+      
+      \PY{n}{x} \PY{o}{=} \PY{n}{backsub}\PY{p}{(}\PY{n}{U}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+      \PY{n}{x}
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[19]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{outcolor}[{\color{outcolor}19}]:} [13/10, 37/10, -11/10]
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[21]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}21}]:} \PY{n}{x} \PY{o}{=} \PY{n}{vector}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+      \PY{n}{A}\PY{o}{*}\PY{n}{x} \PY{o}{==} \PY{n}{b}
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[21]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{outcolor}[{\color{outcolor}21}]:} True
+\end{Verbatim}
+    It is inexpensive to solve linear systems once the PLU-decomposition of
+the RHS matrix \(A\) is obtained. For example, we vary \(\vec{b}\) to
+\((0,1,5)^T\).
+
+    
+\settowidth{\mylength}{\texttt{[24]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}24}]:} \PY{n}{b} \PY{o}{=} \PY{n}{vector}\PY{p}{(}\PY{n}{QQ}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+      \PY{c+c1}{\PYZsh{} then following the same process as above}
+      \PY{n}{y} \PY{o}{=} \PY{n}{forwardsub}\PY{p}{(}\PY{n}{L}\PY{p}{,}\PY{n}{P2}\PY{o}{*}\PY{n}{b}\PY{p}{)}
+      \PY{n}{x} \PY{o}{=} \PY{n}{backsub}\PY{p}{(}\PY{n}{U}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+      \PY{n}{x}
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[24]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{outcolor}[{\color{outcolor}24}]:} [17/20, 43/20, 1/20]
+\end{Verbatim}
+    \subsubsection{Prob 5(a)}\label{prob-5a}
+
+    
+\settowidth{\mylength}{\texttt{[27]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}27}]:} \PY{n}{A} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+      \PY{n}{A}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[27]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{outcolor}[{\color{outcolor}27}]:} 7.0
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[26]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}26}]:} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{5.}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{:}
+          \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{5.}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{:}
+              \PY{k}{for} \PY{n}{z} \PY{o+ow}{in} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{5.}\PY{o}{.} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{:}
+                  \PY{n}{v} \PY{o}{=} \PY{n}{vector}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{z}\PY{p}{]}\PY{p}{)}
+                  \PY{k}{if} \PY{l+m+mi}{7}\PY{o}{*}\PY{n}{v}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)} \PY{o}{==}  \PY{p}{(}\PY{n}{A}\PY{o}{*}\PY{n}{v}\PY{p}{)}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{print} \PY{p}{[}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{z}\PY{p}{]}
+\end{Verbatim}
+    \begin{Verbatim}[commandchars=\\\{\}]
+[-5, 5, 5]
+[-4, 4, 4]
+[-3, 3, 3]
+[-2, 2, 2]
+[-1, 1, 1]
+[0, 0, 0]
+[1, -1, -1]
+[2, -2, -2]
+[3, -3, -3]
+[4, -4, -4]
+[5, -5, -5]
+
+    \end{Verbatim}
+
+    \subsubsection{Prob 6}\label{prob-6}
+
+    
+\settowidth{\mylength}{\texttt{[37]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}37}]:} \PY{n}{A} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.2969}\PY{p}{,} \PY{l+m+mf}{0.8648}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{0.2161}\PY{p}{,} \PY{l+m+mf}{0.1441}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+      \PY{n}{b} \PY{o}{=} \PY{n}{vector}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.8642}\PY{p}{,} \PY{l+m+mf}{0.1440}\PY{p}{]}\PY{p}{)}
+      \PY{n}{x} \PY{o}{=} \PY{n}{vector}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+      
+      \PY{n}{A}\PY{o}{*}\PY{n}{x} \PY{o}{==} \PY{n}{b}
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[37]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{outcolor}[{\color{outcolor}37}]:} True
+\end{Verbatim}
+    
+\settowidth{\mylength}{\texttt{[40]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}40}]:} \PY{n}{x1} \PY{o}{=} \PY{n}{vector}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+      \PY{n}{x2} \PY{o}{=} \PY{n}{vector}\PY{p}{(}\PY{n}{QQ}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.9911}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.4870}\PY{p}{]}\PY{p}{)}
+      
+      \PY{k}{print} \PY{n}{b} \PY{o}{\PYZhy{}} \PY{n}{A}\PY{o}{*}\PY{n}{x1}
+      \PY{k}{print} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{x1}
+      \PY{k}{print} \PY{n}{b} \PY{o}{\PYZhy{}} \PY{n}{A}\PY{o}{*}\PY{n}{x2}
+      \PY{k}{print} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{x2}
+\end{Verbatim}
+    \begin{Verbatim}[commandchars=\\\{\}]
+(-3/5000, -1/10000)
+(2, -3)
+(1/100000000, -1/100000000)
+(10089/10000, -1513/1000)
+
+    \end{Verbatim}
+
+    
+\settowidth{\mylength}{\texttt{[44]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}44}]:} \PY{k}{print} \PY{n}{A}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}
+      \PY{k}{print} \PY{p}{(}\PY{p}{(}\PY{n}{A}\PY{o}{\PYZca{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{p}{)}
+      \PY{k}{print} \PY{n}{A}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{A}\PY{o}{\PYZca{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+    \begin{Verbatim}[commandchars=\\\{\}]
+2.1617
+151300000.0
+327065210.0
+
+    \end{Verbatim}
+
+    It should be true that
+\[\frac1{\kappa(A)}\frac{||\vec{r}||}{||\vec{b}||}
+\leq \frac{||\vec{e}||}{||\vec{x}||}
+\leq \kappa(A)\frac{||\vec{r}||}{||\vec{b}||}\]
+
+    
+\settowidth{\mylength}{\texttt{[47]:\_}}
+\begin{Verbatim}[xleftmargin=-\mylength, commandchars=\\\{\}]
+{\color{incolor}[{\color{incolor}47}]:} \PY{n}{cond} \PY{o}{=} \PY{n}{A}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{A}\PY{o}{\PYZca{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{p}{)}
+      
+      \PY{n}{r1} \PY{o}{=} \PY{n}{b} \PY{o}{\PYZhy{}} \PY{n}{A}\PY{o}{*}\PY{n}{x1}
+      \PY{n}{e1} \PY{o}{=} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{x1}
+      \PY{n}{r2} \PY{o}{=} \PY{n}{b} \PY{o}{\PYZhy{}} \PY{n}{A}\PY{o}{*}\PY{n}{x2}
+      \PY{n}{e2} \PY{o}{=} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{x2}
+      
+      \PY{k}{print} \PY{n}{n}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{cond}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{r1}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{o}{/}\PY{n}{b}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+      \PY{k}{print} \PY{n}{n}\PY{p}{(}\PY{p}{(}\PY{n}{e1}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{o}{/}\PY{n}{x}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+      \PY{k}{print} \PY{n}{n}\PY{p}{(}\PY{n}{cond}\PY{o}{*}\PY{p}{(}\PY{n}{r1}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{o}{/}\PY{n}{b}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+      \PY{k}{print}
+      \PY{k}{print} \PY{n}{n}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{cond}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{r2}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{o}{/}\PY{n}{b}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+      \PY{k}{print} \PY{n}{n}\PY{p}{(}\PY{p}{(}\PY{n}{e2}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{o}{/}\PY{n}{x}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+      \PY{k}{print} \PY{n}{n}\PY{p}{(}\PY{n}{cond}\PY{o}{*}\PY{p}{(}\PY{n}{r2}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{o}{/}\PY{n}{b}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{Infinity}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+    \begin{Verbatim}[commandchars=\\\{\}]
+2.12276851646163e-12
+1.50000000000000
+227076.054154131
+
+7.07589505487211e-17
+0.756500000000000
+3.78460090256885
+
+    \end{Verbatim}
+
+    Works cited
+
+\begin{itemize}
+\tightlist
+\item
+  https://www.student.cs.uwaterloo.ca/\textasciitilde{}cs370/notes/LUExample2.pdf
+\item
+  http://www4.ncsu.edu/\textasciitilde{}kksivara/ma505/handouts/lu-pivot.pdf
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
